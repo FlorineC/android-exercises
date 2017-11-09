@@ -10,6 +10,7 @@ import android.widget.CheckBox;
 public class LibraryActivity extends AppCompatActivity {
 
     private CheckBox checkBox;
+    private final String NAME = "ETATCASECOCHEE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class LibraryActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         // TODO save check box state
+        outState.putBoolean(NAME, checkBox.isChecked());
         super.onSaveInstanceState(outState);
     }
 
@@ -31,6 +33,7 @@ public class LibraryActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         // TODO restore check box
+        checkBox.setChecked(savedInstanceState.getBoolean(NAME, false));
     }
 
     @Override
