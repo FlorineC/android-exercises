@@ -25,7 +25,9 @@ public class LibraryActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Replace with startActivityForResult() to start BookActivity
-                Toast.makeText(LibraryActivity.this, R.string.toast_todo, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LibraryActivity.this, R.string.toast_todo, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(LibraryActivity.this, BookActivity.class);
+                startActivityForResult(intent, 42);
             }
         });
     }
@@ -33,6 +35,10 @@ public class LibraryActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // TODO get back book name
+        if(requestCode == 42 && resultCode == RESULT_OK){
+            String book = data.getStringExtra("BOOK_NAME");
+            Toast.makeText(this, book, Toast.short);
+        }
     }
 
     @Override
