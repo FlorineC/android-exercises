@@ -2,11 +2,16 @@ package fr.android.androidexercises
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.Toolbar
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_library.*
+import java.util.*
+import kotlinx.android.synthetic.main.custom_view_item_book.view.*
 
 class LibraryActivity : AppCompatActivity() {
 
@@ -15,13 +20,17 @@ class LibraryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_library)
         val toolbar = findViewById<View>(R.id.toolbar) as Toolbar
 
-        val messageTextView = findViewById<View>(R.id.messageTextView) as TextView
-        // TODO call setText() on messageTextView
-
+        val books = getBooks()
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = RecyclerAdapter(LayoutInflater.from(this), books)
         setSupportActionBar(toolbar)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    fun getBooks() : List<Book> = (0..99).map {
+            Book("Garry Potter $it", Random().nextInt(30))
+    }
+
+    /*override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.menu_library, menu)
         return true
@@ -34,5 +43,5 @@ class LibraryActivity : AppCompatActivity() {
         val id = item.itemId
 
         return if (id == R.id.action_settings) true else super.onOptionsItemSelected(item)
-    }
+    }*/
 }
